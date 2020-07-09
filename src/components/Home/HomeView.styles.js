@@ -1,5 +1,5 @@
-import {StyleShhet} from 'react-native';
-const homeViewStyles = StyleShhet.create({
+import {StyleSheet} from 'react-native';
+const homeViewStyles = StyleSheet.create({
   container: {
     alignItems:'center'
   },
