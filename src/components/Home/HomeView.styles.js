@@ -1,7 +1,7 @@
 import {StyleShhet} from 'react-native';
 const homeViewStyles = StyleShhet.create({
   container: {
-
+    alignItems:'center'
   },
   header:{
     marginTop: 35,
