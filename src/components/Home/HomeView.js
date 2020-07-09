@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import homeViewStyles from './HomeView.styles'
+import homePg from './HomeView.styles'
 import i18n from '../../i18n/i18n';
-
+import moment from 'moment';
 export default class HomeView extends Component {
   constructor(props){
     super(props)
@@ -11,34 +11,49 @@ export default class HomeView extends Component {
     }
   }
   renderStartBtn(){
-    return <TouchableOpacity
-      style={homeViewStyles.actionBtn} 
-      onPress={() => {
-        setInterval( () => {
-          this.setState({
-            time: this.state.time + 1000
-          })      
-        }, 1000)
-      }}
-    >
-      <Text style={homeViewStyles.textBtn}>{i18n.HOME.startBtn}</Text>
-    </TouchableOpacity>
+    return (
+      <TouchableOpacity
+        style={homePg.actionBtn} 
+        onPress={() => {
+          setInterval( () => {
+            if(!this.state.paused){
+              this.setState({
+                time: this.state.time + 1000
+              })
+            }  
+          }, 1000)
+        }}
+      >
+        <Text style={homePg.textBtn}>{i18n.HOME.startBtn}</Text>
+      </TouchableOpacity>
+    )
   }
   renderTimer(){
-    return <TouchableOpacity
-      style={homeViewStyles.actionBtn} 
-      onPress={() => console.log('running')}
-    >
-      <Text style={homeViewStyles.textBtn}>{this.state.time}</Text>
-    </TouchableOpacity>
+    const {time} = this.state
+    return (
+      <TouchableOpacity
+        style={homePg.actionBtn} 
+        onPress={() => {
+          const {paused} = this.state
+          this.setState({ paused:!paused })
+        }}
+      >
+        <Text style={homePg.textBtn}>
+          {moment.utc(time).format('HH:mm:ss')}
+        </Text>
+        <Text style={[homePg.actionBtn, homePg.pausedBtn]}>
+          {i18n.HOME.PAUSE}
+        </Text>
+      </TouchableOpacity>
+    )
   }
 
   render() {
     const {time} = this.state
     return (
-      <View style={[{flex:1}, homeViewStyles.container]}>
+      <View style={[{flex:1}, homePg.container]}>
         <View style={{flex:1}}>
-          <Text style={homeViewStyles.header}>{i18n.HOME.header}</Text>
+          <Text style={homePg.header}>{i18n.HOME.header}</Text>
         </View>
         <View style={{flex:2}}>
           {time > 0 ? this.renderTimer(): this.renderStartBtn()}

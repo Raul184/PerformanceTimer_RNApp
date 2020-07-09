@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-const homeViewStyles = StyleSheet.create({
+const homePg = StyleSheet.create({
   container: {
     alignItems:'center'
   },
@@ -20,6 +20,9 @@ const homeViewStyles = StyleSheet.create({
   textBtn:{
     fontSize:40,
     fontWeight:'bold'
+  },
+  pausedBtn:{
+    fontSize:35
   }
 })
-export default homeViewStyles;
+export default homePg;
