@@ -23,26 +23,28 @@ export default class HomeView extends Component {
   async handleAppStateChange(nextAppState) {
     const now = new Date().getTime();
     const {time, paused} = this.state;
-    const readTime = AsyncStorage.getItem('@time')
+    const readTime = parseInt( await AsyncStorage.getItem('@time'))
     // time when you went off
-    const readStateChangeTimeStamp = AsyncStorage.getItem('@appStateChangedTimeStamp')
-    
-    const timeDiff = now - parseInt(readStateChangeTimeStamp)
-    const nueTime = parseInt(readTime) + timeDiff
+    const readStateChangeTimeStamp = parseInt(
+      await AsyncStorage.getItem('@appStateChangedTimeStamp')
+    )
+
+    const timeDiff = now - readStateChangeTimeStamp
+    const nueTime = readTime + timeDiff
     
     if(nextAppState === 'active'){
       const isPaused = await AsyncStorage.getItem('@isPaused')
       const wasPaused = isPaused && isPaused ==='true'
       let newState = {
         pauded: wasPaused,
-        time: parseInt(readTime)
+        time: readTime
       }
       if(!wasPaused){
         newState.time = nueTime
       }
       this.setState(newState , this.startTimer)
     }
-    await AsyncStorage.setItem('@isPaused', paused === true ? true : false)
+    await AsyncStorage.setItem('@isPaused', paused === true ? 'true' : 'false')
     await AsyncStorage.setItem('@time', time)
     await AsyncStorage.setItem('@appStateChangegTimeStamp', now)
   }
@@ -61,7 +63,7 @@ export default class HomeView extends Component {
     this.setState({ paused: !paused })
   }
   render() {
-    const {time} = this.state
+    const {time,paused} = this.state
     return <View style={[{flex:1}, homePg.container]}>
       <View style={{flex:1}}>
         <Text style={homePg.header}>{i18n.HOME.header}</Text>
@@ -69,6 +71,7 @@ export default class HomeView extends Component {
       <View style={{flex:2}}>
         <StopWatchBtn 
           time={time} 
+          isPaused={paused}
           startOnPressAction={this.startTimer}
           timerOnPressAction={this.pausedTimer}
         />
