@@ -13,8 +13,8 @@ const StopWatchBtn = ({time,startOnPressAction,timerOnPressAction}) => {
       <Text style={styles.textBtn}>
         {moment.utc(time).format('HH:mm:ss')}
       </Text>
-      <Text style={[styles.actionBtn, styles.pausedBtn]}>
-        {i18n.HOME.pauseBtn}
+      <Text style={[styles.textBtn, styles.pausedBtn]}>
+        Pause
       </Text>
     </TouchableOpacity>
   }
