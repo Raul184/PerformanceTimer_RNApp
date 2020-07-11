@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, AppState } from 'react-native'
 import homePg from './HomeView.styles'
+import { View, Text, AppState } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import i18n from '../../i18n/i18n';
 import StopWatchBtn from '../stopWatchBtn/StopWatchBtn';
-import AsyncStorage from '@react-native-community/async-storage'
+import FinishBtn from '../finishBtn/FinishBtn'
 export default class HomeView extends Component {
   constructor(props){
     super(props)
@@ -24,7 +25,6 @@ export default class HomeView extends Component {
     const now = new Date().getTime();
     const {time, paused} = this.state;
     const readTime = parseInt( await AsyncStorage.getItem('@time'))
-    // time when you went off
     const readStateChangeTimeStamp = parseInt(
       await AsyncStorage.getItem('@appStateChangedTimeStamp')
     )
@@ -45,8 +45,8 @@ export default class HomeView extends Component {
       this.setState(newState , this.startTimer)
     }
     await AsyncStorage.setItem('@isPaused', paused === true ? 'true' : 'false')
-    await AsyncStorage.setItem('@time', time)
-    await AsyncStorage.setItem('@appStateChangegTimeStamp', now)
+    await AsyncStorage.setItem('@time', JSON.stringify(time))
+    await AsyncStorage.setItem('@appStateChangegTimeStamp', JSON.stringify(now))
   }
 
   startTimer(){
@@ -68,13 +68,14 @@ export default class HomeView extends Component {
       <View style={{flex:1}}>
         <Text style={homePg.header}>{i18n.HOME.header}</Text>
       </View>
-      <View style={{flex:2}}>
+      <View style={homePg.btns}>
         <StopWatchBtn 
           time={time} 
           isPaused={paused}
           startOnPressAction={this.startTimer}
           timerOnPressAction={this.pausedTimer}
         />
+        <FinishBtn />
       </View>
     </View>
   }

@@ -9,6 +9,11 @@ const homePg = StyleSheet.create({
     fontSize:40,
     color:'black'
   },
+  btns:{
+    flex:2,
+    alignItems:'center',
+    justifyContent: 'space-between'
+  },
   actionBtn:{
     width:284,
     height:284,
