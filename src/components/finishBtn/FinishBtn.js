@@ -1,9 +1,13 @@
 import React from 'react'
 import {Text, TouchableOpacity, StyleSheet} from 'react-native'
 
-const FinishBtn = () => {
+const FinishBtn = ({clearTimer,stopTimer}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => {
+      stopTimer()
+      // clearTimer()
+      console.log('navigation to be set')
+    }}>
       <Text style={styles.btnText}>Finish</Text>
     </TouchableOpacity>
   )

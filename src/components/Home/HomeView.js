@@ -13,6 +13,7 @@ export default class HomeView extends Component {
     }
     this.startTimer = this.startTimer.bind(this);
     this.pausedTimer = this.pausedTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
   }
   componentDidMount(){
@@ -36,7 +37,7 @@ export default class HomeView extends Component {
       const isPaused = await AsyncStorage.getItem('@isPaused')
       const wasPaused = isPaused && isPaused ==='true'
       let newState = {
-        pauded: wasPaused,
+        paused: wasPaused,
         time: readTime
       }
       if(!wasPaused){
@@ -50,7 +51,7 @@ export default class HomeView extends Component {
   }
 
   startTimer(){
-    if(this.timerIntervalId) clearInterval(this.timerIntervalId)
+    this.clearTimer()
     this.timerIntervalId = setInterval(() => {
       const {time,paused}= this.state;
       if(!paused){
@@ -58,9 +59,29 @@ export default class HomeView extends Component {
       }
     },1000)
   }
+  clearTimer(){
+    if(this.timerIntervalId) {
+      clearInterval(this.timerIntervalId)
+    }
+  }
+  stopTimer(){
+    this.setState({
+      time: 0
+    })
+  }
   pausedTimer(){
     const {paused} = this.state;
     this.setState({ paused: !paused })
+  }
+  renderFinishBtn(){
+    const {time,paused} = this.state;
+    if(time > 0 && !paused){
+      return <FinishBtn 
+        clearTimer={this.clearTimer}
+        stopTimer={this.stopTimer}
+      />
+    }
+    return null
   }
   render() {
     const {time,paused} = this.state
@@ -75,7 +96,7 @@ export default class HomeView extends Component {
           startOnPressAction={this.startTimer}
           timerOnPressAction={this.pausedTimer}
         />
-        <FinishBtn />
+        {this.renderFinishBtn()}
       </View>
     </View>
   }
