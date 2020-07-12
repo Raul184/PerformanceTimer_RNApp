@@ -3,8 +3,8 @@ import homePg from './HomeView.styles'
 import { View, Text, AppState } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import i18n from '../../i18n/i18n';
-import StopWatchBtn from '../stopWatchBtn/StopWatchBtn';
-import FinishBtn from '../finishBtn/FinishBtn'
+import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
+import FinishBtn from '../layout/finishBtn/FinishBtn'
 export default class HomeView extends Component {
   constructor(props){
     super(props)
@@ -79,6 +79,7 @@ export default class HomeView extends Component {
       return <FinishBtn 
         clearTimer={this.clearTimer}
         stopTimer={this.stopTimer}
+        navigation={() => this.props.navigation.navigate('Finish')}
       />
     }
     return null

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './stopwatchBtn.styles'
 import { Text, TouchableOpacity, Animated } from 'react-native'
 import moment from 'moment';
-import i18n from '../../i18n/i18n';
+import i18n from '../../../i18n/i18n';
 
 const StopWatchBtn = ({
   time,
