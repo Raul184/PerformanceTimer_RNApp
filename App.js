@@ -46,10 +46,17 @@ export default function App() {
         tabBarOptions={{
           activeTintColor: 'green',
           inactiveTintColor: 'gray',
+          labelStyle:{
+            fontSize:12,
+            fontWeight:'bold'
+          }
         }}
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="History" component={HistoryStackScreen} />
+        <Tab.Screen 
+          name="History"
+          component={HistoryStackScreen} 
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
