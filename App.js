@@ -49,7 +49,9 @@ export default function App() {
           labelStyle:{
             fontSize:12,
             fontWeight:'bold'
-          }
+          },
+          activeBackgroundColor:'#eee',
+          inactiveBackgroundColor:'none'
         }}
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />

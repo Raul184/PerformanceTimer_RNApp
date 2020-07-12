@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Text, SafeAreaView } from 'react-native'
+import styles from './FinishView.style'
 
 const FinishView = () => {
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <Text>Finish screen</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 
