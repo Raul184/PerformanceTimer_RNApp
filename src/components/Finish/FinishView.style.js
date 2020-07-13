@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
     color:'#848484',
     paddingHorizontal:12,
     marginTop:7
+  },
+  btnSection:{ 
+    flex:4, 
+    flexDirection:'row', 
+    justifyContent:'space-between',
+    marginTop:60
   }
 })
 export default styles;

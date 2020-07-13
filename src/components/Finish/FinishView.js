@@ -1,22 +1,23 @@
 import React from 'react'
-import { View,Text, SafeAreaView, TextInput, TouchableOpacity } from 'react-native'
 import styles from './FinishView.style'
+import { View,Text, SafeAreaView, TextInput} from 'react-native'
 import ActionBtn from '../layout/actionBtn/ActionBtn'
+import i18n from '../../i18n/i18n'
 const FinishView = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flex:3, justifyContent:'space-between'}}>
-        <Text style={styles.header}>Your mark:</Text>
+        <Text style={styles.header}>{i18n.FV.header}</Text>
         <Text style={styles.subHeader}>00:15:00</Text>
         <View style={{flex:0.2 }}/>
       </View>
       <View style={{flex:1}}>
-        <Text style={styles.label}>Name</Text>
+        <Text style={styles.label}>{i18n.FV.name}</Text>
         <TextInput style={styles.input}/>
       </View>
-      <View style={{flex:4}} >
-        <ActionBtn label='Save' backgroundColor={'#f32343'} textColor={'#fff'} />
-        <ActionBtn label='Pass' backgroundColor={'green'} textColor={'#fff'} />
+      <View style={styles.btnSection} >
+        <ActionBtn label={i18n.FV.save} backgroundColor={'#f32343'} textColor={'#fff'} />
+        <ActionBtn label={i18n.FV.cancel} backgroundColor={'green'} textColor={'#fff'} />
       </View>
     </SafeAreaView>
   )

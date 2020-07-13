@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 const ActionBtn = ({label, textColor, backgroundColor}) => {
   return <TouchableOpacity style={[styles.btn , {backgroundColor}]}>
-  <Text style={{ color: textColor }}>{label}</Text>
+  <Text style={[styles.captionStyle,{ color: textColor }]}>{label}</Text>
 </TouchableOpacity>
 }
 
@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   captionStyle:{
-    
+    fontSize:24,
+    textTransform: 'lowercase'
   }
 })
 export default ActionBtn
