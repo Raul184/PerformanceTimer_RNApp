@@ -4,7 +4,6 @@ import { View, Text, AppState } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import i18n from '../../i18n/i18n';
 import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
-import FinishBtn from '../layout/finishBtn/FinishBtn'
 export default class HomeView extends Component {
   constructor(props){
     super(props)
@@ -64,11 +63,6 @@ export default class HomeView extends Component {
       clearInterval(this.timerIntervalId)
     }
   }
-  stopTimer(){
-    this.setState({
-      time: 0
-    })
-  }
   pausedTimer(){
     const {paused} = this.state;
     this.setState({ paused: !paused })
@@ -76,11 +70,16 @@ export default class HomeView extends Component {
   renderFinishBtn(){
     const {time,paused} = this.state;
     if(time > 0 && !paused){
-      return <FinishBtn 
-        clearTimer={this.clearTimer}
-        stopTimer={this.stopTimer}
-        navigation={() => this.props.navigation.navigate('Finish')}
-      />
+      return (
+        <TouchableOpacity onPress={() => {
+          clearTimer()
+          this.props.navigation.navigate('Finish',{})
+          this.setState({ time: 0 })
+          console.log('navigation to be set')
+        }}>
+          <Text style={styles.btnText}>Finish</Text>
+        </TouchableOpacity>
+      )
     }
     return null
   }

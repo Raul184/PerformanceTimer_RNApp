@@ -29,6 +29,11 @@ const homePg = StyleSheet.create({
   },
   pausedBtn:{
     fontSize:35
+  },
+  btnText:{
+    fontSize: 45,
+    fontWeight:'bold',
+    color:'#EA4c4c'
   }
 })
 export default homePg;
