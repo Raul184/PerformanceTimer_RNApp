@@ -8,7 +8,9 @@ const FinishView = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flex:3, justifyContent:'space-between'}}>
-        <Text style={styles.header}>{i18n.FV.header}</Text>
+        <Text style={styles.header}>{
+          i18n.FV.header
+        }</Text>
         <Text style={styles.subHeader}>{
           moment.utc(timeSpent).format('HH:mm:ss')
         }</Text>
@@ -19,8 +21,17 @@ const FinishView = ({navigation}) => {
         <TextInput style={styles.input}/>
       </View>
       <View style={styles.btnSection} >
-        <ActionBtn label={i18n.FV.save} backgroundColor={'#f32343'} textColor={'#fff'} />
-        <ActionBtn label={i18n.FV.cancel} backgroundColor={'green'} textColor={'#fff'} />
+        <ActionBtn 
+          label={i18n.FV.save} 
+          backgroundColor={'#f32343'} 
+          textColor={'#fff'} 
+        />
+        <ActionBtn 
+          label={i18n.FV.cancel} 
+          backgroundColor={'green'} 
+          textColor={'#fff'}
+          onPress={() => navigation.goBack()} 
+        />
       </View>
     </SafeAreaView>
   )
