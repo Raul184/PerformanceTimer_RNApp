@@ -6,7 +6,6 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import HomeView from './src/components/Home/HomeView';
 import FinishView from './src/components/Finish/FinishView';
 import HistoryView from './src/components/History/HistoryView';
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 

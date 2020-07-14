@@ -1,8 +1,9 @@
 const i18n = {
   HOME:{
     header:'Hi br@!',
-    startBtn: 'START',
-    pauseBtn: 'Pause'
+    startBtn: 'Start',
+    pauseBtn: 'Pause',
+    finishBtn: 'Finish'
   },
   SWBtn: {
     blinkDelay: 700

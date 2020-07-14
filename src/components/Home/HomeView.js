@@ -73,11 +73,11 @@ export default class HomeView extends Component {
       return (
         <TouchableOpacity onPress={() => {
           clearTimer()
-          this.props.navigation.navigate('Finish',{})
+          this.props.navigation.navigate('Finish',{spentTime: time})
           this.setState({ time: 0 })
           console.log('navigation to be set')
         }}>
-          <Text style={styles.btnText}>Finish</Text>
+          <Text style={styles.btnText}>{i18n.HOME.finishBtn}</Text>
         </TouchableOpacity>
       )
     }
