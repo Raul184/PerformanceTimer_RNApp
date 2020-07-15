@@ -13,6 +13,9 @@ const i18n = {
     name: 'Name',
     save: 'Save',
     cancel:'Cancel'
+  },
+  HISTORY:{
+    header: 'Personal Stats'
   }
   
 }

@@ -18,7 +18,7 @@ const FinishView = ({route,navigation:{goBack}}) => {
     else{
       activities = JSON.parse(activities)
     }
-    const date = new Date().getTime()
+    const date = new Date().getDate()
     activities.push({ name ,spentTime ,date })
     await AsyncStorage.setItem(storageKey, JSON.stringify(activities));
     console.log(activities);
