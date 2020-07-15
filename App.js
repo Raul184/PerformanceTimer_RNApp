@@ -45,10 +45,10 @@ export default function App() {
           activeTintColor: 'green',
           inactiveTintColor: 'gray',
           labelStyle:{
-            fontSize:12,
+            fontSize:13,
             fontWeight:'bold'
           },
-          activeBackgroundColor:'#eee',
+          activeBackgroundColor:'none',
           inactiveBackgroundColor:'none'
         }}
       >
