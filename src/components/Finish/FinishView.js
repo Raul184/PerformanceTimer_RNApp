@@ -4,24 +4,25 @@ import { View,Text, SafeAreaView, TextInput} from 'react-native'
 import ActionBtn from '../layout/actionBtn/ActionBtn'
 import i18n from '../../i18n/i18n'
 import AsyncStorage from '@react-native-community/async-storage'
-
-const FinishView = ({navigation}) => {
+import moment from 'moment';
+const FinishView = ({route,navigation:{goBack}}) => {
   const [name, setName] = useState('')
-  const timeSpent = navigation.getParam('spentTime');
+  const { spentTime } = route.params;
 
   const saveTime = async () => {
     const storageKey = '@activities';
     let activities = await AsyncStorage.getItem(storageKey)
-    if(activities === null){
+    if(activities === null || activities === undefined){
       activities = []
     }
     else{
       activities = JSON.parse(activities)
     }
     const date = new Date().getTime()
-    activities.push({ name ,timeSpent ,date })
+    activities.push({ name ,spentTime ,date })
     await AsyncStorage.setItem(storageKey, JSON.stringify(activities));
-    navigation.goBack()
+    console.log(activities);
+    goBack()
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +31,7 @@ const FinishView = ({navigation}) => {
           i18n.FV.header
         }</Text>
         <Text style={styles.subHeader}>{
-          moment.utc(timeSpent).format('HH:mm:ss')
+          moment.utc(spentTime).format('HH:mm:ss')
         }</Text>
         <View style={{flex:0.2 }}/>
       </View>
@@ -53,7 +54,7 @@ const FinishView = ({navigation}) => {
           label={i18n.FV.cancel} 
           backgroundColor={'green'} 
           textColor={'#fff'}
-          onPress={() => navigation.goBack()} 
+          onPress={goBack} 
         />
       </View>
     </SafeAreaView>

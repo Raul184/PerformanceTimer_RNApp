@@ -25,7 +25,6 @@ function HistoryStackScreen() {
     </Stack.Navigator>
   );
 }
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -37,7 +36,7 @@ export default function App() {
               iconName = focused ? 'ios-home' : 'ios-home'
             } 
             else if (route.name === 'History') {
-              iconName = focused ? 'ios-list-box' : 'ios-analytics';
+              iconName = focused ? 'ios-analytics' : 'ios-analytics';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -54,10 +53,7 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen 
-          name="History"
-          component={HistoryStackScreen} 
-        />
+        <Tab.Screen name="History" component={HistoryStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

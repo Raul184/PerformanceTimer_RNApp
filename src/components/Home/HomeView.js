@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import homePg from './HomeView.styles'
-import { View, Text, AppState } from 'react-native'
+import styles from './HomeView.styles'
+import { View, Text, AppState, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import i18n from '../../i18n/i18n';
 import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
@@ -12,7 +12,6 @@ export default class HomeView extends Component {
     }
     this.startTimer = this.startTimer.bind(this);
     this.pausedTimer = this.pausedTimer.bind(this);
-    this.stopTimer = this.stopTimer.bind(this);
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
   }
   componentDidMount(){
@@ -72,10 +71,9 @@ export default class HomeView extends Component {
     if(time > 0 && !paused){
       return (
         <TouchableOpacity onPress={() => {
-          clearTimer()
+          this.clearTimer()
           this.props.navigation.navigate('Finish',{spentTime: time})
           this.setState({ time: 0 })
-          console.log('navigation to be set')
         }}>
           <Text style={styles.btnText}>{i18n.HOME.finishBtn}</Text>
         </TouchableOpacity>
@@ -85,11 +83,11 @@ export default class HomeView extends Component {
   }
   render() {
     const {time,paused} = this.state
-    return <View style={[{flex:1}, homePg.container]}>
+    return <View style={[{flex:1}, styles.container]}>
       <View style={{flex:1}}>
-        <Text style={homePg.header}>{i18n.HOME.header}</Text>
+        <Text style={styles.header}>{i18n.HOME.header}</Text>
       </View>
-      <View style={homePg.btns}>
+      <View style={styles.btns}>
         <StopWatchBtn 
           time={time} 
           isPaused={paused}
