@@ -13,6 +13,7 @@ export default class HomeView extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.pausedTimer = this.pausedTimer.bind(this);
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
+    this.handleAppStateChange('initial')
   }
   componentDidMount(){
     AppState.addEventListener('change' , this.handleAppStateChange)
@@ -27,11 +28,10 @@ export default class HomeView extends Component {
     const readStateChangeTimeStamp = parseInt(
       await AsyncStorage.getItem('@appStateChangedTimeStamp')
     )
-
     const timeDiff = now - readStateChangeTimeStamp
     const nueTime = readTime + timeDiff
     
-    if(nextAppState === 'active'){
+    if( !isNan(readTime) && nextAppState === 'active' || nextAppState === 'initial'){
       const isPaused = await AsyncStorage.getItem('@isPaused')
       const wasPaused = isPaused && isPaused ==='true'
       let newState = {
@@ -44,8 +44,8 @@ export default class HomeView extends Component {
       this.setState(newState , this.startTimer)
     }
     await AsyncStorage.setItem('@isPaused', paused === true ? 'true' : 'false')
-    await AsyncStorage.setItem('@time', JSON.stringify(time))
-    await AsyncStorage.setItem('@appStateChangegTimeStamp', JSON.stringify(now))
+    await AsyncStorage.setItem('@time', time.toString())
+    await AsyncStorage.setItem('@appStateChangegTimeStamp', now.toString())
   }
 
   startTimer(){
