@@ -5,12 +5,14 @@ import ActionBtn from '../layout/actionBtn/ActionBtn'
 import i18n from '../../i18n/i18n'
 import AsyncStorage from '@react-native-community/async-storage'
 import moment from 'moment';
+import {ACTIVITY_STORAGE_KEY} from '../../config/consts'
+
 const FinishView = ({route,navigation:{goBack}}) => {
   const [name, setName] = useState('')
   const { spentTime } = route.params;
 
   const saveTime = async () => {
-    const storageKey = '@activities';
+    const storageKey = ACTIVITY_STORAGE_KEY;
     let activities = await AsyncStorage.getItem(storageKey)
     if(activities === null || activities === undefined){
       activities = []

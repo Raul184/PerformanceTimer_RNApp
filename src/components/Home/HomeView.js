@@ -4,6 +4,11 @@ import { View, Text, AppState, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import i18n from '../../i18n/i18n';
 import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
+import {
+  APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY,
+  IS_PAUSED_STORAGE_KEY,
+  TIME_STORAGE_KEY,
+} from '../../config/consts';
 export default class HomeView extends Component {
   constructor(props){
     super(props)
@@ -24,15 +29,15 @@ export default class HomeView extends Component {
   async handleAppStateChange(nextAppState) {
     const now = new Date().getTime();
     const {time, paused} = this.state;
-    const readTime = parseInt( await AsyncStorage.getItem('@time'))
+    const readTime = parseInt( await AsyncStorage.getItem(TIME_STORAGE_KEY))
     const readStateChangeTimeStamp = parseInt(
-      await AsyncStorage.getItem('@appStateChangedTimeStamp')
+      await AsyncStorage.getItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY)
     )
     const timeDiff = now - readStateChangeTimeStamp
     const nueTime = readTime + timeDiff
     
     if( !isNan(readTime) && nextAppState === 'active' || nextAppState === 'initial'){
-      const isPaused = await AsyncStorage.getItem('@isPaused')
+      const isPaused = await AsyncStorage.getItem(IS_PAUSED_STORAGE_KEY)
       const wasPaused = isPaused && isPaused ==='true'
       let newState = {
         paused: wasPaused,
@@ -43,9 +48,9 @@ export default class HomeView extends Component {
       }
       this.setState(newState , this.startTimer)
     }
-    await AsyncStorage.setItem('@isPaused', paused === true ? 'true' : 'false')
-    await AsyncStorage.setItem('@time', time.toString())
-    await AsyncStorage.setItem('@appStateChangegTimeStamp', now.toString())
+    await AsyncStorage.setItem(IS_PAUSED_STORAGE_KEY, paused === true ? 'true' : 'false')
+    await AsyncStorage.setItem(TIME_STORAGE_KEY, time.toString())
+    await AsyncStorage.setItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY, now.toString())
   }
 
   startTimer(){
