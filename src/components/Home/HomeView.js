@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import styles from './HomeView.styles'
 import { View, ImageBackground, Text, AppState, TouchableOpacity } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import { Ionicons } from '@expo/vector-icons';
+import styles from './HomeView.styles'
 import i18n from '../../i18n/i18n';
+import AsyncStorage from '@react-native-community/async-storage'
 import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
 import {
   APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY,
@@ -99,7 +100,7 @@ export default class HomeView extends Component {
           this.props.navigation.navigate('Finish',{spentTime: time})
           this.setState({ time: 0 })
         }}>
-          <Text style={styles.btnText}>{i18n.HOME.finishBtn}</Text>
+          <Ionicons name='ios-square' size={72} color='white' style={{marginBottom:70}}/>
         </TouchableOpacity>
       )
     }

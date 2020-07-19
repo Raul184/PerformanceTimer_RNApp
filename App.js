@@ -53,14 +53,14 @@ export default function App() {
             backgroundColor: 'transparent',
             borderTopWidth: 0,
             position: 'absolute',
-            bottom: 0,
-            height: 100
+            bottom: 10,
+            height: 80
           },
           activeBackgroundColor:'none',
           inactiveBackgroundColor:'none'
         }}
       >
-        <Tab.Screen name="Home" component={HomeStackScreen} style={{backgroundColor: 'transparent'}}/>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="History" component={HistoryStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
