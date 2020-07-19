@@ -20,12 +20,7 @@ export default class HomeView extends Component {
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
     this.handleAppStateChange('initial')
   }
-  componentDidMount(){
-    AppState.addEventListener('change' , this.handleAppStateChange)
-  }
-  componentWillUnmount(){
-    AppState.removeEventListener('change', this.handleAppStateChange)
-  }
+
   async handleAppStateChange(nextAppState) {
     const now = new Date().getTime();
     const {time, paused} = this.state;
@@ -33,10 +28,12 @@ export default class HomeView extends Component {
     const readStateChangeTimeStamp = parseInt(
       await AsyncStorage.getItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY)
     )
-    const timeDiff = now - readStateChangeTimeStamp
-    const nueTime = readTime + timeDiff
     
-    if( !isNan(readTime) && nextAppState === 'active' || nextAppState === 'initial'){
+    if( !isNaN(readTime) && 
+      ( nextAppState === 'active' || nextAppState === 'initial')
+    ){
+      const timeDiff = now - readStateChangeTimeStamp
+      const nueTime = readTime + timeDiff
       const isPaused = await AsyncStorage.getItem(IS_PAUSED_STORAGE_KEY)
       const wasPaused = isPaused && isPaused ==='true'
       let newState = {
@@ -46,11 +43,29 @@ export default class HomeView extends Component {
       if(!wasPaused){
         newState.time = nueTime
       }
-      this.setState(newState , this.startTimer)
+      this.setState(newState , () => {
+        if(newState.time > 0){
+          this.startTimer()
+        }
+      });
     }
-    await AsyncStorage.setItem(IS_PAUSED_STORAGE_KEY, paused === true ? 'true' : 'false')
-    await AsyncStorage.setItem(TIME_STORAGE_KEY, time.toString())
-    await AsyncStorage.setItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY, now.toString())
+    else{
+      await AsyncStorage.setItem(
+        IS_PAUSED_STORAGE_KEY, paused === true ? 'true' : 'false'
+      )
+      await AsyncStorage.setItem(
+        TIME_STORAGE_KEY, time.toString()
+      )
+      await AsyncStorage.setItem(
+        APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY, now.toString()
+      )
+    }
+  }
+  componentDidMount(){
+    AppState.addEventListener('change' , this.handleAppStateChange)
+  }
+  componentWillUnmount(){
+    AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
   startTimer(){
@@ -62,15 +77,18 @@ export default class HomeView extends Component {
       }
     },1000)
   }
+
   clearTimer(){
     if(this.timerIntervalId) {
       clearInterval(this.timerIntervalId)
     }
   }
+
   pausedTimer(){
     const {paused} = this.state;
     this.setState({ paused: !paused })
   }
+  
   renderFinishBtn(){
     const {time,paused} = this.state;
     if(time > 0 && !paused){
