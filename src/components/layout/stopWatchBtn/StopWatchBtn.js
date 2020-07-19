@@ -3,6 +3,7 @@ import styles from './stopwatchBtn.styles'
 import { Text, TouchableOpacity, Animated } from 'react-native'
 import moment from 'moment';
 import i18n from '../../../i18n/i18n';
+import { Ionicons } from '@expo/vector-icons';
 
 const StopWatchBtn = ({
   time,
@@ -40,9 +41,10 @@ const StopWatchBtn = ({
         <Text style={styles.textBtn}>
           {moment.utc(time).format('HH:mm:ss')}
         </Text>
-        <Text style={[styles.textBtn, styles.pausedBtn]}>
+        {/* <Text style={[styles.textBtn, styles.pausedBtn]}>
           Pause
-        </Text>
+        </Text> */}
+        <Ionicons name='ios-pause' size={72} color='white' />
       </Animated.View>
     </TouchableOpacity>
   }
@@ -51,7 +53,8 @@ const StopWatchBtn = ({
         style={styles.actionBtn} 
         onPress={startOnPressAction}
       >
-        <Text style={styles.textBtn}>{i18n.HOME.startBtn}</Text>
+        {/* <Text style={styles.textBtn}>{i18n.HOME.startBtn}</Text> */}
+        <Ionicons name='ios-play' size={92} color='white' />
     </TouchableOpacity>
   }
 }

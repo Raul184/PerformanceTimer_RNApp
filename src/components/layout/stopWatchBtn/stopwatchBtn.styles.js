@@ -2,16 +2,16 @@ import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
   actionBtn:{
-    width:284,
-    height:284,
+    width:200,
+    height:184,
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: 'red',
     borderRadius:142
   },
   textBtn:{
-    fontSize:40,
-    fontWeight:'bold'
+    fontSize:50,
+    fontWeight:'bold',
+    color:'#fff'
   },
   pausedBtn:{
     fontSize:35

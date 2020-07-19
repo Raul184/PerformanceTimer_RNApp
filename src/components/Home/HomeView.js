@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './HomeView.styles'
-import { View, Text, AppState, TouchableOpacity } from 'react-native'
+import { View, ImageBackground, Text, AppState, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import i18n from '../../i18n/i18n';
 import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
@@ -9,6 +9,7 @@ import {
   IS_PAUSED_STORAGE_KEY,
   TIME_STORAGE_KEY,
 } from '../../config/consts';
+
 export default class HomeView extends Component {
   constructor(props){
     super(props)
@@ -88,7 +89,7 @@ export default class HomeView extends Component {
     const {paused} = this.state;
     this.setState({ paused: !paused })
   }
-  
+
   renderFinishBtn(){
     const {time,paused} = this.state;
     if(time > 0 && !paused){
@@ -107,18 +108,23 @@ export default class HomeView extends Component {
   render() {
     const {time,paused} = this.state
     return <View style={[{flex:1}, styles.container]}>
-      <View style={{flex:1}}>
-        <Text style={styles.header}>{i18n.HOME.header}</Text>
-      </View>
-      <View style={styles.btns}>
-        <StopWatchBtn 
-          time={time} 
-          isPaused={paused}
-          startOnPressAction={this.startTimer}
-          timerOnPressAction={this.pausedTimer}
-        />
-        {this.renderFinishBtn()}
-      </View>
+      <ImageBackground 
+        source={require("../../../assets/lion.png")} 
+        style={styles.image} 
+      >
+        <View style={{flex:1}}>
+          <Text style={styles.header}>{i18n.HOME.header}</Text>
+        </View>
+        <View style={styles.btns}>
+          <StopWatchBtn 
+            time={time} 
+            isPaused={paused}
+            startOnPressAction={this.startTimer}
+            timerOnPressAction={this.pausedTimer}
+          />
+          {this.renderFinishBtn()}
+        </View>
+      </ImageBackground>
     </View>
   }
 }

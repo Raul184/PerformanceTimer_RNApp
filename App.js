@@ -44,15 +44,23 @@ export default function App() {
         tabBarOptions={{
           activeTintColor: 'green',
           inactiveTintColor: 'gray',
+          lazyLoad:true,
           labelStyle:{
             fontSize:13,
             fontWeight:'bold'
+          },
+          style:{
+            backgroundColor: 'transparent',
+            borderTopWidth: 0,
+            position: 'absolute',
+            bottom: 0,
+            height: 100
           },
           activeBackgroundColor:'none',
           inactiveBackgroundColor:'none'
         }}
       >
-        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Home" component={HomeStackScreen} style={{backgroundColor: 'transparent'}}/>
         <Tab.Screen name="History" component={HistoryStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>

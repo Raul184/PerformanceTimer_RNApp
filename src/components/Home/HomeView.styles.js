@@ -1,8 +1,13 @@
 import {StyleSheet} from 'react-native';
 const homePg = StyleSheet.create({
   container: {
-    alignItems:'center',
-    backgroundColor:'#fff'
+    alignItems:'center'
+  },
+  image:{
+    flex: 1,
+    width:'100%',
+    resizeMode: "cover",
+    justifyContent: "center"
   },
   header:{
     marginTop: 35,
