@@ -13,8 +13,12 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   subHeader:{
-    flex:1,
-    fontSize:40,
+    fontSize:48,
+    fontWeight:'bold',
+    fontStyle:'italic',
+    color:'rgba(252, 9, 9, 0.7)',
+    opacity: 0.8,
+    marginBottom:30,
     textAlign:'center'
   },
   label:{

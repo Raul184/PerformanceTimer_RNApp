@@ -38,11 +38,11 @@ const FinishView = ({route,navigation:{goBack}}) => {
         <View style={{flex:0.2 }}/>
       </View>
       <View style={{flex:1}}>
-        <Text style={styles.label}>{i18n.FV.name}</Text>
         <TextInput 
           style={styles.input}
           value={name}
           onChangeText={e => setName(e)}
+          placeholder={i18n.FV.name}
         />
       </View>
       <View style={styles.btnSection} >
