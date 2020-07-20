@@ -14,7 +14,9 @@ class HistoryView extends React.Component {
     };
     this.getActivities = this.getActivities.bind(this);
     props.navigation.addListener('willFocus', this.getActivities);
+    this.getActivities()
   }
+  
 
   async getActivities() {
     const activities = await AsyncStorage.getItem(ACTIVITY_STORAGE_KEY);
