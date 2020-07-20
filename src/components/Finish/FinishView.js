@@ -48,13 +48,14 @@ const FinishView = ({route,navigation:{goBack}}) => {
       <View style={styles.btnSection} >
         <ActionBtn 
           label={i18n.FV.save} 
-          backgroundColor={'#f32343'} 
+          backgroundColor={'rgba(122, 233, 173, 0.38)'} 
           textColor={'#fff'} 
           onPress={saveTime}
+          direction={true}
         />
         <ActionBtn 
           label={i18n.FV.cancel} 
-          backgroundColor={'green'} 
+          backgroundColor={'rgba(235, 78, 78, 0.24);'} 
           textColor={'#fff'}
           onPress={goBack} 
         />

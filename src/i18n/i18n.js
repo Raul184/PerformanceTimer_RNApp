@@ -12,7 +12,7 @@ const i18n = {
     header: 'Your Mark:',
     name: 'Name',
     save: 'Save',
-    cancel:'Cancel'
+    cancel:'Pass'
   },
   HISTORY:{
     header: 'Personal Stats'
