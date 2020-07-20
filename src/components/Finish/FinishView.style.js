@@ -21,10 +21,6 @@ const styles = StyleSheet.create({
     marginBottom:30,
     textAlign:'center'
   },
-  label:{
-    fontSize:15,
-    paddingHorizontal:9
-  },
   input:{
     height:44,
     borderRadius:5,

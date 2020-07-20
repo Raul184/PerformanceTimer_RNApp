@@ -12,11 +12,17 @@ const styles = StyleSheet.create({
     padding:12,
     height:65
   },
+  itemNameText:{
+    fontSize: 18
+  },
   listItem2: {
     flex:2,
     alignItems:'flex-end',
     flexDirection:'column',
     justifyContent:'space-between'
+  },
+  itemDetailsText: {
+    fontSize: 14
   }
 })
 export default styles;

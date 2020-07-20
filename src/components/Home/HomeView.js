@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ImageBackground, Text, AppState, TouchableOpacity } from 'react-native'
+import { SafeAreaView,View, ImageBackground, Text, AppState, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './HomeView.styles'
 import i18n from '../../i18n/i18n';
@@ -113,7 +113,7 @@ export default class HomeView extends Component {
   }
   render() {
     const {time,paused} = this.state
-    return <View style={[{flex:1}, styles.container]}>
+    return <SafeAreaView style={[{flex:1}, styles.container]}>
       <ImageBackground 
         source={require("../../../assets/lion.png")} 
         style={styles.image} 
@@ -131,6 +131,6 @@ export default class HomeView extends Component {
           {this.renderFinishBtn()}
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   }
 }

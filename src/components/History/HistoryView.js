@@ -1,53 +1,69 @@
-import React, {useEffect, useState} from 'react'
-import styles from './HistoryView.style'
-import { SafeAreaView,View, Text, FlatList } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
-import moment from 'moment';
-import i18n from '../../i18n/i18n';
+import React, {useState, useEffect} from 'react';
+import styles from './HistoryView.style';
+import {SafeAreaView, Text, View, FlatList} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import moment from 'moment'; 
+import i18n from '../../i18n/i18n'
+import {ACTIVITY_STORAGE_KEY} from '../../config/consts';
 
-const HistoryView = ({navigation}) => {
-  const [listAct, setListAct] = useState('')
-  useEffect(() => {
-    navigation.addListener('willFocus', getActivities)
-    getActivities()
-  }, 
-  [getActivities])
-  const getActivities = async () => {
-    const activities = await AsyncStorage.getItem('@activities')
-    let parsedActivities = []
-    if(activities !== null ){
-      parsedActivities = JSON.parse(activities)
+class HistoryView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      parsedActivities: [],
+    };
+    this.getActivities = this.getActivities.bind(this);
+    props.navigation.addListener('willFocus', this.getActivities);
+  }
+
+  async getActivities() {
+    const activities = await AsyncStorage.getItem(ACTIVITY_STORAGE_KEY);
+    let parsedActivities = [];
+    if (activities !== null) {
+      parsedActivities = JSON.parse(activities);
     }
-    setListAct(parsedActivities)
+    this.setState({parsedActivities: parsedActivities.reverse()});
   }
 
-  const renderItems = ({item:{name,date,spentTime}}) => {
-    return <View style={styles.listItem}>
-      <View style={{flex:4}}>
-        <Text style={{fontSize:18}}>{name}</Text>
-      </View>
-      <View style={styles.listItem2}>
-        <View><Text style={{fontSize:14}}>
-          {date}
-          </Text>
+  renderItem({item}) {
+    return (
+      <View style={styles.listItem}>
+        <View style={{flex: 4}}>
+          <Text style={styles.itemNameText}>{item.name}</Text>
         </View>
-        <View><Text style={{fontSize:14}}>
-          {moment.utc(spentTime).format('DD MMM YYYY')}
-          </Text>
+        <View style={styles.listItem2}>
+          <View>
+            <Text style={styles.itemDetailsText}>
+              {moment.utc(item.date).format(i18n.DATE_FORMAT)}
+            </Text>
+          </View>
+          <View>
+            <Text style={styles.itemDetailsText}>
+              {moment.utc(item.timeSpent).format(i18n.TIME_FORMAT)}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    );
   }
-  return (
-    <SafeAreaView style={{flex:1}}>
-      <Text style={styles.header}>{i18n.HISTORY.header}</Text>
-      <FlatList 
-        data={listAct}
-        renderItem={renderItems}
-        keyExtractor={(item,index) => item.name + index}
-      />
-
-    </SafeAreaView>
-  )
+  render(){
+    const {parsedActivities} = this.state;
+    return (
+      <SafeAreaView style={{flex: 1}}>
+        <Text style={styles.header}>
+          {i18n.HISTORY.header}
+        </Text>
+        <FlatList
+          data={parsedActivities}
+          renderItem={this.renderItem}
+          showsVerticalScrollIndicator={true}
+          keyExtractor={(item, index) => {
+            return item.name + index;
+          }}
+        />
+      </SafeAreaView>
+    );
+  }
 }
-export default HistoryView
+
+export default HistoryView;
