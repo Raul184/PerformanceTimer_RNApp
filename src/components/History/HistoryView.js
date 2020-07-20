@@ -41,7 +41,7 @@ class HistoryView extends React.Component {
           </View>
           <View>
             <Text style={styles.itemDetailsText}>
-              {moment.utc(item.timeSpent).format(i18n.TIME_FORMAT)}
+              {moment.utc(item.spentTime).format(i18n.TIME_FORMAT)}
             </Text>
           </View>
         </View>
