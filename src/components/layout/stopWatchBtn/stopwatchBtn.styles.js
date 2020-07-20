@@ -8,10 +8,14 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     borderRadius:142
   },
+  b:{
+    opacity: 0.8
+  },
   textBtn:{
     fontSize:50,
     fontWeight:'bold',
-    color:'#fff'
+    color:'rgba(252, 9, 9, 0.97)',
+    opacity: 0.8
   },
   pausedBtn:{
     fontSize:35

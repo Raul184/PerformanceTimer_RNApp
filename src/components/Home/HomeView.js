@@ -100,7 +100,7 @@ export default class HomeView extends Component {
           this.props.navigation.navigate('Finish',{spentTime: time})
           this.setState({ time: 0 })
         }}>
-          <Ionicons name='ios-square' size={72} color='white' style={{marginBottom:70}}/>
+          <Ionicons name='ios-square-outline' size={72} color='white' style={{marginBottom:70}}/>
         </TouchableOpacity>
       )
     }

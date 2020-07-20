@@ -34,20 +34,22 @@ export default function App() {
             let iconName;
             if (route.name === 'Home') {
               iconName = focused ? 'ios-home' : 'ios-home'
+              size=35
             } 
             else if (route.name === 'History') {
               iconName = focused ? 'ios-analytics' : 'ios-analytics';
+              size=35
             }
             return <Ionicons name={iconName} size={size} color={color} />;
-          },
+          }
         })}
         tabBarOptions={{
-          activeTintColor: 'green',
-          inactiveTintColor: 'gray',
+          activeTintColor: ' rgba(0, 0, 0, 0.37)',
+          inactiveTintColor: 'rgba(255, 255, 255, 0.97)',
           lazyLoad:true,
           labelStyle:{
-            fontSize:13,
-            fontWeight:'bold'
+            display:'none',
+            padding:0
           },
           style:{
             backgroundColor: 'transparent',
