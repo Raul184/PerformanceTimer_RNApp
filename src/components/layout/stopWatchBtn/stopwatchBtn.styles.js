@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
   actionBtn:{
-    width:200,
+    width:230,
     height:184,
     alignItems:'center',
     justifyContent:'center',
@@ -11,11 +11,15 @@ const styles = StyleSheet.create({
   b:{
     opacity: 0.8
   },
+  p:{
+    opacity:0.6
+  },
   textBtn:{
-    fontSize:50,
-    fontWeight:'bold',
+    fontSize:60,
+    fontStyle:'italic',
     color:'rgba(252, 9, 9, 0.97)',
-    opacity: 0.8
+    opacity: 0.8,
+    marginBottom:30
   },
   pausedBtn:{
     fontSize:35

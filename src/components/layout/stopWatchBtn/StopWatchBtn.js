@@ -43,7 +43,7 @@ const StopWatchBtn = ({
         <Image 
           source={require('../../../../assets/pause.png')}
           blurRadius={1} 
-          style={[{height: 70}]} 
+          style={[styles.p ,{height: 70}]} 
         />
       </Animated.View>
     </TouchableOpacity>

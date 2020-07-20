@@ -44,8 +44,9 @@ export default function App() {
           }
         })}
         tabBarOptions={{
-          activeTintColor: ' rgba(0, 0, 0, 0.37)',
-          inactiveTintColor: 'rgba(255, 255, 255, 0.97)',
+          activeTintColor: ' rgba(0, 0, 0, 0.4)',
+          inactiveTintColor: 'rgba(255, 255, 255, 0.9)',
+          opacity: 0.8,
           lazyLoad:true,
           labelStyle:{
             display:'none',
