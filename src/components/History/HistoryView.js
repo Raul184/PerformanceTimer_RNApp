@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import styles from './HistoryView.style';
 import {SafeAreaView, Text, View, FlatList} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
