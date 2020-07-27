@@ -1,105 +1,112 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { SafeAreaView,View, ImageBackground, Text, AppState, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
-import styles from './HomeView.styles'
+import Gstyles from '../../GlobalStyles'
+import styles from './HomeViewStyles';
 import i18n from '../../i18n/i18n';
-import AsyncStorage from '@react-native-community/async-storage'
-import StopWatchBtn from '../layout/stopWatchBtn/StopWatchBtn';
+import StopWatchButton from '../StopwatchButton/StopWatchButton';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY,
   IS_PAUSED_STORAGE_KEY,
   TIME_STORAGE_KEY,
 } from '../../config/consts';
-
-export default class HomeView extends Component {
-  constructor(props){
-    super(props)
+class HomeView extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      time:0
-    }
+      time: 0,
+    };
     this.startTimer = this.startTimer.bind(this);
-    this.pausedTimer = this.pausedTimer.bind(this);
+    this.pauseTimer = this.pauseTimer.bind(this);
     this.handleAppStateChange = this.handleAppStateChange.bind(this);
-    this.handleAppStateChange('initial')
+    this.handleAppStateChange('initial');
   }
 
   async handleAppStateChange(nextAppState) {
     const now = new Date().getTime();
     const {time, paused} = this.state;
-    const readTime = parseInt( await AsyncStorage.getItem(TIME_STORAGE_KEY))
-    const readStateChangeTimeStamp = parseInt(
-      await AsyncStorage.getItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY)
-    )
-    
-    if( !isNaN(readTime) && 
-      ( nextAppState === 'active' || nextAppState === 'initial')
-    ){
-      const timeDiff = now - readStateChangeTimeStamp
-      const nueTime = readTime + timeDiff
-      const isPaused = await AsyncStorage.getItem(IS_PAUSED_STORAGE_KEY)
-      const wasPaused = isPaused && isPaused ==='true'
+    const readTime = parseInt(await AsyncStorage.getItem(TIME_STORAGE_KEY));
+    const readStateChangeTimestamp = parseInt(
+      await AsyncStorage.getItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY),
+    );
+
+    if (
+      !isNaN(readTime) &&
+      (nextAppState === 'active' || nextAppState === 'initial')
+    ) {
+      const timeDifference = now - readStateChangeTimestamp;
+      const newTime = readTime !== 0 ? readTime + timeDifference : 0;
+      const isPaused = await AsyncStorage.getItem(IS_PAUSED_STORAGE_KEY);
+      const wasPaused = isPaused && isPaused === 'true';
       let newState = {
         paused: wasPaused,
-        time: readTime
+        time: readTime,
+      };
+      if (!wasPaused) {
+        newState.time = newTime;
       }
-      if(!wasPaused){
-        newState.time = nueTime
-      }
-      this.setState(newState , () => {
-        if(newState.time > 0){
-          this.startTimer()
+      this.setState(newState, () => {
+        if (newState.time > 0) {
+          this.startTimer();
         }
       });
+    } else {
+      await AsyncStorage.setItem(
+        IS_PAUSED_STORAGE_KEY,
+        paused === true ? 'true' : 'false',
+      );
+      await AsyncStorage.setItem(TIME_STORAGE_KEY, time.toString());
+      await AsyncStorage.setItem(APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY, now.toString());
     }
-    else{
-      await AsyncStorage.setItem(
-        IS_PAUSED_STORAGE_KEY, paused === true ? 'true' : 'false'
-      )
-      await AsyncStorage.setItem(
-        TIME_STORAGE_KEY, time.toString()
-      )
-      await AsyncStorage.setItem(
-        APP_STATE_CHANGED_TIMESTAMP_STORAGE_KEY, now.toString()
-      )
-    }
-  }
-  componentDidMount(){
-    AppState.addEventListener('change' , this.handleAppStateChange)
-  }
-  componentWillUnmount(){
-    AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
-  startTimer(){
-    this.clearTimer()
+  componentDidMount() {
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    console.log(AppState.state);
+    AppState.removeEventListiner('change', this.handleAppStateChange);
+  }
+
+  startTimer() {
+    this.clearTimer();
     this.timerIntervalId = setInterval(() => {
-      const {time,paused}= this.state;
-      if(!paused){
-        this.setState({time: time + 1000})
+      const {time, paused} = this.state;
+      if (!paused) {
+        this.setState({
+          time: time + 1000,
+        });
       }
-    },1000)
+    }, 1000);
   }
 
-  clearTimer(){
-    if(this.timerIntervalId) {
-      clearInterval(this.timerIntervalId)
+  clearTimer() {
+    if (this.timerIntervalId) {
+      clearInterval(this.timerIntervalId);
     }
   }
 
-  pausedTimer(){
+  pauseTimer() {
     const {paused} = this.state;
-    this.setState({ paused: !paused })
+    this.setState({
+      paused: !paused,
+    });
   }
 
-  renderFinishBtn(){
-    const {time,paused} = this.state;
-    if(time > 0 && !paused){
+  renderFinishButton() {
+    const {time, paused} = this.state;
+    if (time && !paused) {
       return (
-        <TouchableOpacity onPress={() => {
-          this.clearTimer()
-          this.props.navigation.navigate('Finish',{spentTime: time})
-          this.setState({ time: 0 })
-        }}>
+        <TouchableOpacity
+          onPress={() => {
+            this.clearTimer();
+            this.props.navigation.navigate('Finish', {timeSpent: time});
+            this.setState({
+              time: 0,
+            });
+          }}>
           <Ionicons 
             name='ios-square-outline' 
             size={72} 
@@ -107,30 +114,36 @@ export default class HomeView extends Component {
             style={{marginBottom:70}}
           />
         </TouchableOpacity>
-      )
+      );
     }
-    return null
+    return null;
   }
   render() {
-    const {time,paused} = this.state
-    return <SafeAreaView style={[{flex:1}, styles.container]}>
-      <ImageBackground 
-        source={require("../../../assets/lion.png")} 
-        style={styles.image} 
-      >
-        <View style={{flex:1}}>
-          <Text style={styles.header}>{i18n.HOME.header}</Text>
-        </View>
-        <View style={styles.btns}>
-          <StopWatchBtn 
-            time={time} 
-            isPaused={paused}
-            startOnPressAction={this.startTimer}
-            timerOnPressAction={this.pausedTimer}
-          />
-          {this.renderFinishBtn()}
-        </View>
-      </ImageBackground>
-    </SafeAreaView>
+    const {time, paused} = this.state;
+    return (
+      <SafeAreaView style={[{flex: 1}, styles.container]}>
+        <ImageBackground 
+          source={require("../../../assets/lion.png")} 
+          style={Gstyles.image} 
+        >
+          <View style={{flex: 1}}>
+            <Text style={Gstyles.header}>
+              {i18n.HomeV.HEADER}
+            </Text>
+          </View>
+          <View style={[{flex: 2}, styles.btns]}>
+            <StopWatchButton
+              paused={paused}
+              time={time}
+              startOnPressAction={this.startTimer}
+              timerOnPressAction={this.pauseTimer}
+            />
+            {this.renderFinishButton()}
+          </View>
+        </ImageBackground>
+      </SafeAreaView>
+    );
   }
 }
+
+export default HomeView;
