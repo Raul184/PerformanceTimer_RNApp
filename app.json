@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "timer",
+    "name": "PerformanceTimer",
     "slug": "timer",
     "version": "1.0.0",
     "orientation": "portrait",
