@@ -1,24 +1,16 @@
 const i18n = {
   TIME_FORMAT: 'HH:mm:ss',
   DATE_FORMAT: 'DD MMM YYYY',
-  HOME:{
-    header:'Hi br@!',
-    startBtn: 'Start',
-    pauseBtn: 'Pause',
-    finishBtn: 'Finish'
+  CANCEL: 'cancel',
+  SAVE: 'save',
+  HomeV: {
+    HEADER: `Let's go br@!`
   },
-  SWBtn: {
-    blinkDelay: 700
+  FV: {
+    HEADER: 'Your m@rk'
   },
-  FV:{
-    header: 'Your Mark:',
-    name: 'Name',
-    save: 'Save',
-    cancel:'Pass'
-  },
-  HISTORY:{
-    header: 'Personal Stats'
+  HistV: {
+    HEADER: 'Records',
   }
-  
-}
+};
 export default i18n;
