@@ -66,7 +66,6 @@ class HomeView extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log(AppState.state);
     AppState.removeEventListiner('change', this.handleAppStateChange);
   }
 

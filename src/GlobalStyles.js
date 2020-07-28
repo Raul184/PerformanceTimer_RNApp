@@ -18,5 +18,12 @@ export default StyleSheet.create({
     	width: 2,
     	height: 2,
     }
+  },
+  shadow:{
+    textShadowColor:'rgba(0, 0, 0, 0.8)',
+    textShadowOffset: {
+    	width: 4,
+    	height: 4,
+    }
   }
 });
