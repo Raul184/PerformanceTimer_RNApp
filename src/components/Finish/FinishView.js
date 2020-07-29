@@ -62,7 +62,6 @@ const FinishView = ({route, navigation:{goBack}}) => {
               placeholder='Name it'
               value={name}
               onChangeText={txt => setName(txt)}
-              minLength={4}
               required
             />
             { validate && <Text style={styles.alert}>
