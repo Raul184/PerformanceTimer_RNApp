@@ -11,14 +11,21 @@ const FinishViewStyles = StyleSheet.create({
     textAlign:'center'
   },
   input:{
-    height:44,
+    height:50,
     borderRadius:5,
     borderBottomWidth:3,
     borderBottomColor:'#ffffff',
-    color:'#ffffff',
     fontWeight:'bold',
+    fontSize:16,
+    color:'#ffffff',
     paddingHorizontal:14,
     marginTop:7
+  },
+  alert:{
+    margin:30,
+    fontWeight:'bold',
+    fontSize:16,
+    color:'red',
   },
   btnSection:{ 
     flex:4, 

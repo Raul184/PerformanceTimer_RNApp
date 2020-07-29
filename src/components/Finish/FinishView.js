@@ -12,8 +12,14 @@ import {ACTIVITY_STORAGE_KEY} from '../../config/consts';
 const FinishView = ({route, navigation:{goBack}}) => {
   const { timeSpent } = route.params;
   const [name, setName] = useState('');
+  const [validate, setValidate] = useState(false)
 
   const saveTime = async () => {
+    if(name.length === 0) {
+      setValidate(true)
+      setTimeout(() => setValidate(false), 1500)
+      return
+    }
     let activities = await AsyncStorage.getItem(ACTIVITY_STORAGE_KEY);
     if (activities === null) {
       activities = [];
@@ -53,10 +59,15 @@ const FinishView = ({route, navigation:{goBack}}) => {
           <ResponsiveCentered>
             <TextInput
               style={styles.input}
+              placeholder='Name it'
               value={name}
               onChangeText={txt => setName(txt)}
-              placeholder='Name it'
+              minLength={4}
+              required
             />
+            { validate && <Text style={styles.alert}>
+                Give it a name mate, thanks.
+              </Text>}
           </ResponsiveCentered>
         </View>
         <View style={{flex: 5}}>
