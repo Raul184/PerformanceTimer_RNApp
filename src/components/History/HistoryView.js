@@ -14,10 +14,12 @@ class HistoryView extends React.Component {
       parsedActivities: [],
     };
     this.getActivities = this.getActivities.bind(this);
-    props.navigation.addListener('willFocus', this.getActivities);
     this.getActivities()
+    props.navigation.addListener('focus', () =>  this.getActivities());
   }
-
+  componentWillUnmount(){
+    return props.navigation.removeListener()
+  }
   async getActivities() {
     const activities = await AsyncStorage.getItem(ACTIVITY_STORAGE_KEY);
     let parsedActivities = [];

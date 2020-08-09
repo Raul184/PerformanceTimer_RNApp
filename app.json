@@ -3,7 +3,7 @@
     "name": "Perform@nce-Timer",
     "icon": "./assets/android-rounded.png",
     "version": "1.0.0",
-    "slug": "perform@nce",
+    "slug": "performtimer",
     "orientation": "portrait",
     "splash": {
       "image": "./assets/splash.png",
@@ -17,8 +17,8 @@
       "**/*"
     ],
     "android": {
-      "package": "the.ios.performancetimer",
-      "versionCode": 1
+      "package": "com.cnq.performancetimer",
+      "versionCode": 2
     },
     "ios": {
       "bundleIdentifier": "the.ios.performancetimer",
