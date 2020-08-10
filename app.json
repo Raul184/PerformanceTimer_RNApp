@@ -18,7 +18,7 @@
     ],
     "android": {
       "package": "com.cnq.performancetimer",
-      "versionCode": 2
+      "versionCode": 3
     },
     "ios": {
       "bundleIdentifier": "the.ios.performancetimer",
