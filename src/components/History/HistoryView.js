@@ -12,7 +12,7 @@ class HistoryView extends React.Component {
     super(props);
     this.state = {
       parsedActivities: [],
-    };
+    }; 
     this.getActivities = this.getActivities.bind(this);
     this.getActivities()
     props.navigation.addListener('focus', () =>  this.getActivities());
