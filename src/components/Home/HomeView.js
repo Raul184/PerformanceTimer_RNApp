@@ -3,7 +3,6 @@ import { SafeAreaView,View, ImageBackground, Text, AppState, TouchableOpacity } 
 import { Ionicons } from '@expo/vector-icons';
 import Gstyles from '../../GlobalStyles'
 import styles from './HomeViewStyles';
-import i18n from '../../i18n/i18n';
 import StopWatchButton from '../StopwatchButton/StopWatchButton';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -64,7 +63,6 @@ class HomeView extends React.Component {
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange);
   }
-
   componentWillUnmount() {
     AppState.removeEventListiner('change', this.handleAppStateChange);
   }
