@@ -46,9 +46,7 @@ const FinishView = ({route, navigation:{goBack}}) => {
           style={Gstyles.image} 
       >
         <View style={{flex: 4, justifyContent: 'space-between'}}>
-          <Text style={Gstyles.header}>
-            {i18n.FV.HEADER}
-          </Text>
+          <Text style={Gstyles.header}></Text>
           <Text style={styles.subHeader}>
             {moment.utc(timeSpent).format(i18n.TIME_FORMAT)}
           </Text>

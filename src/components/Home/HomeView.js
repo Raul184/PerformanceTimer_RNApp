@@ -125,11 +125,7 @@ class HomeView extends React.Component {
           source={require("../../../assets/lion.png")} 
           style={Gstyles.image} 
         >
-          <View style={{flex: 1}}>
-            <Text style={Gstyles.header}>
-              {i18n.HomeV.HEADER}
-            </Text>
-          </View>
+          <View style={{flex: 1}}></View>
           <View style={[{flex: 2}, styles.btns]}>
             <StopWatchButton
               paused={paused}

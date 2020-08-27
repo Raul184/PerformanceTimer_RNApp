@@ -18,7 +18,7 @@ const StopWatchButtonsStyles = StyleSheet.create({
     width:70
   },
   textBtn:{
-    fontSize:60,
+    fontSize:50,
     fontStyle:'italic',
     color:'rgba(252, 9, 9, 0.97)',
     opacity: 0.8,
