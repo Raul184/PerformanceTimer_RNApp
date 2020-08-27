@@ -15,8 +15,8 @@ export default StyleSheet.create({
     color:'black',
     textShadowColor:'rgba(0, 0, 0, 0.3)',
     textShadowOffset: {
-    	width: 2,
-    	height: 2,
+    	width: 0,
+    	height: 3,
     }
   }
 });
